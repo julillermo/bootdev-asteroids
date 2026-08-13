@@ -1,5 +1,9 @@
+from turtle import update
+
 import pygame
 
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from logger import log_state
 from player import Player
@@ -12,11 +16,20 @@ def main():
     clock_time = pygame.time.Clock()
     dt = 0.0
 
-    # Initialize player
-    player = Player(
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = updatable
+
+    # # Initialize player
+    _player = Player(
         SCREEN_WIDTH / 2,
         SCREEN_HEIGHT / 2,
     )
+    _AsField = AsteroidField()
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -35,8 +48,10 @@ def main():
 
         dt = clock_time.tick(60) / 1000
 
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+
+        for drw in drawable:
+            drw.draw(screen)
 
         pygame.display.flip()
 

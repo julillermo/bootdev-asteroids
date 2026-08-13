@@ -20,7 +20,7 @@ class Player(CircleShape):
 
     def draw(self, screen: pygame.Surface) -> None:
         pygame.draw.polygon(
-            surface=screen, color="white", points=self.triangle(), width=LINE_WIDTH
+            surface=screen, color="green", points=self.triangle(), width=LINE_WIDTH
         )
 
     def rotate(self, dt: float) -> None:
