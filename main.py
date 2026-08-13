@@ -23,6 +23,7 @@ def main():
     shots = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
+    # Everytime you create an asteroid object, it will be spawned
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
     Shot.containers = (shots, updatable, drawable)
@@ -64,7 +65,7 @@ def main():
             for shot in shots:
                 if ast.collides_with(shot):
                     log_event("asteroid_shot")
-                    ast.kill()
+                    ast.split()
                     shot.kill()
 
         pygame.display.flip()
