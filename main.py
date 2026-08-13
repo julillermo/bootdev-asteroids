@@ -32,11 +32,12 @@ def main():
             pass
 
         screen.fill(color="black")
-        player.draw(screen)
 
         dt = clock_time.tick(60) / 1000
 
-        # print(f"delta-time: {dt}")
+        player.update(dt)
+        player.draw(screen)
+
         pygame.display.flip()
 
 
