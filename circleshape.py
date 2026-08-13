@@ -1,5 +1,3 @@
-from xmlrpc.client import boolean
-
 import pygame
 
 
